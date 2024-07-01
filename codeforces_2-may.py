@@ -73,3 +73,32 @@ from functools import cache
 #         print("Sasha")
 #     else:
 #         print("Draw")
+
+
+from collections import defaultdict
+T = int(input())
+for _ in range(T):
+    n,k,q = map(int,input().split())
+    arr = list(map(int,input().split()))
+    brr = list(map(int,input().split()))
+    a = [0]
+    b = [0]
+    for i in range(len(arr)):
+        a.append(arr[i])
+        b.append(brr[i])
+    dict_ = [0]*(k+1)
+    # dict_.append(0.0)
+    j = 1
+    for i in range(1,k+1):
+        if i<=a[j]:
+            speed =((a[j] - a[j-1])/(b[j] - b[j-1]))
+            dict_[i] = dict_[i-1] + float(1/speed)
+        else:
+            j+=1
+            speed = ((a[j] - a[j - 1]) / (b[j] - b[j - 1]))
+            dict_[i] = dict_[i - 1] + float(1 / speed)
+    print(dict_)
+    for k in range(q):
+        print(int(dict_[int(input())]),end = " ")
+    print()
+
